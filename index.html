@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>cubing stopwatch</title>
+    </head>
+    <body>
+        <h1 id="time">0</h1>
+        <button id="start" onclick="onClick()">start the timer</button>
+        <script>
+            let pastEpoch
+            let timing = false;
+            let showingInterval
+
+            function onClick() {
+                if(timing) {
+                    timing=false;
+                    document.getElementById("start").innerHTML = "start the timer"
+                    clearInterval(showingInterval)
+                    showingInterval = null
+                    show()
+                } else {
+                    pastEpoch = Date.now;
+                    timing=true
+                    document.getElementById("start").innerHTML = "stop the timer"
+                    if(!showingInterval){
+                        showingInterval = setInterval(show, 1000)
+                    }
+                    show()
+                }
+
+            }
+            function  show () {
+                document.getElementById("time").innerHTML = (Date.now() - pastEpoch)/1000
+            }
+        </script>
+    </body>
+</html>
